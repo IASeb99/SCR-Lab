@@ -51,7 +51,7 @@
               <div class="avatar" id="inicial" aria-hidden="true">C</div>
               <div class="celular-quien"><strong id="titulo">Café de la esquina</strong><span id="estado">en línea</span></div>
             </div>
-            <div class="chat" id="chat" aria-live="polite" aria-label="Conversación de ejemplo">
+            <div class="chat" id="chat" role="group" aria-label="Conversación de ejemplo">
               <div class="b b-cliente">Hola, ¿hacen delivery?</div>
               <div class="b b-bot">¡Hola! Sí, hacemos delivery en el sector de 8 am a 6 pm.</div>
               <div class="b b-cliente">¿Cuánto cuesta el desayuno completo?</div>
@@ -313,6 +313,7 @@
   <p class="pie-datos">Guardamos tu nombre, tu teléfono y las fotos que envías solo para atenderte. Se borran a los 15 días. Puedes pedir que borremos tus datos escribiendo BORRAR por WhatsApp o al correo. Te atiende un asistente con inteligencia artificial y una persona cuando hace falta. <a href="/privacidad/">Política de privacidad completa</a>.</p>
 </footer>
 
+<div class="solo-lector" id="anuncio" role="status" aria-live="polite" aria-atomic="true"></div>
 <script src="/assets/app.js" defer></script>
 </body>
 </html>

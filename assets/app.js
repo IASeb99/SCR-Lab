@@ -80,7 +80,8 @@
     if (on && !typingEl) {
       typingEl = document.createElement('div');
       typingEl.className = 'escribiendo b-entra';
-      typingEl.innerHTML = '<span class="solo-lector">escribiendo</span><span class="punto" aria-hidden="true"></span><span class="punto" aria-hidden="true"></span><span class="punto" aria-hidden="true"></span>';
+      typingEl.setAttribute('aria-hidden', 'true');
+      typingEl.innerHTML = '<span class="punto"></span><span class="punto"></span><span class="punto"></span>';
       chatEl.appendChild(typingEl);
     } else if (!on && typingEl) {
       chatEl.removeChild(typingEl);
@@ -88,6 +89,8 @@
     }
     estadoEl.textContent = on ? 'escribiendo…' : 'en línea';
   }
+  var anuncioEl = $('#anuncio');
+  function anunciar(texto) { anuncioEl.textContent = ''; setTimeout(function () { anuncioEl.textContent = texto; }, 50); }
   function limpiarChat() {
     typingEl = null;
     while (chatEl.firstChild) chatEl.removeChild(chatEl.firstChild);
@@ -149,8 +152,9 @@
     rapidasEl.removeChild(boton);
     if (sig) sig.focus();
     burbuja('c', q);
+    anunciar('Usted: ' + q);
     if (!rapidasEl.children.length) rapidasZona.hidden = true;
-    if (quieto) { burbuja('b', a); return; }
+    if (quieto) { burbuja('b', a); anunciar('Respuesta: ' + a); return; }
     pendiente = true;
     escribiendo(true);
     var t = token;
@@ -158,6 +162,7 @@
       if (t !== token) return;
       escribiendo(false);
       burbuja('b', a);
+      anunciar('Respuesta: ' + a);
       pendiente = false;
     }, 1200);
     timers.push(id);
