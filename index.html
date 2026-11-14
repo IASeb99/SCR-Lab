@@ -3,44 +3,316 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SCR Lab · Fotos y campañas con IA para negocios</title>
-<style>
-body{margin:0;font-family:Arial,sans-serif;color:#1d2433;background:#f6f7fb;line-height:1.5}
-header{background:#0B1F3A;color:#fff;text-align:center;padding:48px 16px}
-h1{margin:0;font-size:40px}
-main{max-width:800px;margin:0 auto;padding:16px}
-section{background:#fff;border-radius:12px;padding:20px;margin:16px 0}
-h2{color:#0B1F3A;margin-top:0}
-a.btn{display:inline-block;background:#25D366;color:#063;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold}
-footer{text-align:center;color:#5b6475;font-size:14px;padding:24px}
-footer a{color:#5b6475}
-</style>
+<title>SCR Lab · Asistente de WhatsApp para su negocio</title>
+<meta name="description" content="Su negocio contesta por WhatsApp, aunque usted esté ocupado. Responde con sus precios y horarios, agenda citas en su calendario y le pasa el chat a usted cuando hace falta.">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/estilo.css">
 </head>
 <body>
-<header>
-<h1>SCR LAB</h1>
-<p>Fotos, campañas y asistentes de WhatsApp con inteligencia artificial para negocios.</p>
-<a class="btn" href="https://wa.me/593982453444">Escríbenos por WhatsApp</a>
-</header>
-<main>
-<section>
-<h2>Qué hacemos</h2>
-<p>Fotos de producto y de local con IA, campañas para redes sociales y SCR Systems, un asistente de WhatsApp que contesta, agenda citas y avisa a una persona cuando hace falta. Tu primera muestra es gratis.</p>
+<a class="saltar" href="#como">Saltar al contenido</a>
+
+<div class="oscuro">
+  <header class="barra">
+    <span class="marca">SCR LAB</span>
+    <nav aria-label="Principal">
+      <a href="#como">Cómo funciona</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-pill" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20la%20prueba%20gratis">Prueba gratis</a>
+  </header>
+
+  <main>
+  <section class="hero">
+    <div class="hero-texto">
+      <h1>Su negocio contesta por WhatsApp, <span class="luz">aunque usted esté ocupado.</span></h1>
+      <p class="lead">Responde con sus precios y horarios, agenda citas en su calendario y le pasa el chat a usted cuando hace falta.</p>
+      <div class="hero-cta">
+        <a class="btn btn-grande" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20la%20prueba%20gratis">Pida su prueba gratis</a>
+        <span class="aparte">Sin conectar su número todavía.</span>
+      </div>
+    </div>
+
+    <div class="hero-demo">
+      <div class="chips" role="group" aria-label="Elija un tipo de negocio" id="negocios">
+        <button type="button" class="chip" data-neg="cafe" aria-pressed="true">Cafetería</button>
+        <button type="button" class="chip" data-neg="pelu" aria-pressed="false">Peluquería</button>
+        <button type="button" class="chip" data-neg="ferre" aria-pressed="false">Ferretería</button>
+      </div>
+
+      <div class="celular">
+        <div class="celular-marco">
+          <div class="celular-pantalla">
+            <div class="celular-cab">
+              <div class="avatar" id="inicial" aria-hidden="true">C</div>
+              <div class="celular-quien"><strong id="titulo">Café de la esquina</strong><span id="estado">en línea</span></div>
+            </div>
+            <div class="chat" id="chat" aria-live="polite" aria-label="Conversación de ejemplo">
+              <div class="b b-cliente">Hola, ¿hacen delivery?</div>
+              <div class="b b-bot">¡Hola! Sí, hacemos delivery en el sector de 8 am a 6 pm.</div>
+              <div class="b b-cliente">¿Cuánto cuesta el desayuno completo?</div>
+              <div class="b b-bot">El desayuno completo cuesta $4,50. ¿Se lo envío hoy?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notas">
+        <div class="nota flota">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><rect x="2" y="3" width="14" height="13" rx="3" fill="none" stroke="#1A7F5A" stroke-width="2"></rect><path d="M5 9l3 3 5-5" fill="none" stroke="#1A7F5A" stroke-width="2" stroke-linecap="round"></path></svg>
+          Cita agendada
+        </div>
+        <div class="nota nota-azul flota2">Responde a las 23:41</div>
+      </div>
+
+      <div class="rapidas-zona" id="rapidas-zona" hidden>
+        <span class="aparte" id="rapidas-titulo">Toque una pregunta y vea cómo responde:</span>
+        <div class="rapidas" id="rapidas"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cinta-caja" aria-hidden="true">
+    <div class="cinta">
+      <span>Cafeterías</span><i>●</i><span>Peluquerías</span><i>●</i><span>Ferreterías</span><i>●</i><span>Consultorios</span><i>●</i><span>Talleres</span><i>●</i><span>Restaurantes</span><i>●</i><span>Tiendas</span><i>●</i>
+      <span class="copia">Cafeterías</span><i class="copia">●</i><span class="copia">Peluquerías</span><i class="copia">●</i><span class="copia">Ferreterías</span><i class="copia">●</i><span class="copia">Consultorios</span><i class="copia">●</i><span class="copia">Talleres</span><i class="copia">●</i><span class="copia">Restaurantes</span><i class="copia">●</i><span class="copia">Tiendas</span><i class="copia">●</i>
+    </div>
+  </div>
+
+  <section id="como" class="como">
+    <div class="como-cab">
+      <h2>Así trabaja por usted</h2>
+      <div class="controles" id="controles">
+        <button type="button" class="redondo" id="anterior" aria-label="Paso anterior"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3L5 9l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button>
+        <button type="button" class="redondo" id="pausa" aria-label="Pausar los pasos">
+          <svg id="ico-pausa" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+          <svg id="ico-play" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" hidden><path d="M5 3l8 5-8 5z" fill="currentColor"></path></svg>
+        </button>
+        <button type="button" class="redondo" id="siguiente" aria-label="Paso siguiente"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M7 3l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button>
+      </div>
+    </div>
+
+    <div class="segmentos" id="segmentos">
+      <button type="button" class="seg" aria-label="Ver paso 1: Escribe"><span class="seg-barra"><span class="seg-llena"></span></span>Escribe</button>
+      <button type="button" class="seg" aria-label="Ver paso 2: Responde"><span class="seg-barra"><span class="seg-llena"></span></span>Responde</button>
+      <button type="button" class="seg" aria-label="Ver paso 3: Agenda"><span class="seg-barra"><span class="seg-llena"></span></span>Agenda</button>
+      <button type="button" class="seg" aria-label="Ver paso 4: Le avisa"><span class="seg-barra"><span class="seg-llena"></span></span>Le avisa</button>
+    </div>
+
+    <div class="diapos" id="diapos">
+      <div class="slide">
+        <div class="diapo diapo-texto">
+          <span class="num">01</span>
+          <strong class="diapo-t">Su cliente escribe, a cualquier hora</strong>
+          <span class="diapo-p">Aunque usted esté atendiendo, manejando o durmiendo.</span>
+        </div>
+        <div class="diapo diapo-caja">
+          <div class="pop d1 tarjeta tarjeta-cliente">
+            <span class="peq">WhatsApp · ahora</span>
+            <strong>Cliente nuevo</strong>
+            <span>¿Tienen turno mañana?</span>
+          </div>
+          <span class="pop d2 pildora">Son las 23:41. Usted descansa.</span>
+        </div>
+      </div>
+
+      <div class="slide" hidden>
+        <div class="diapo diapo-texto">
+          <span class="num">02</span>
+          <strong class="diapo-t">El asistente responde al momento</strong>
+          <span class="diapo-p">Con sus precios y sus horarios reales, nunca inventados.</span>
+        </div>
+        <div class="diapo diapo-caja">
+          <div class="pop d1 b b-cliente grande">¿Tienen turno mañana?</div>
+          <div class="pop d2 b b-bot grande">Sí: 10:00, 11:30 o 16:00. ¿Cuál le queda mejor?</div>
+          <span class="pop d3 luz-txt">Respondió al momento</span>
+        </div>
+      </div>
+
+      <div class="slide" hidden>
+        <div class="diapo diapo-texto">
+          <span class="num">03</span>
+          <strong class="diapo-t">La cita queda en su calendario</strong>
+          <span class="diapo-p">En su Google Calendar, con recordatorio para el cliente.</span>
+        </div>
+        <div class="diapo diapo-caja">
+          <strong class="manana">Mañana</strong>
+          <div class="hora libre"><span>10:00</span><span>Libre</span></div>
+          <div class="pop d1 hora ocupada"><span>11:30</span><span>María · corte</span></div>
+          <div class="hora libre"><span>16:00</span><span>Libre</span></div>
+          <span class="pop d2 pildora">Recordatorio: un día antes</span>
+        </div>
+      </div>
+
+      <div class="slide" hidden>
+        <div class="diapo diapo-texto">
+          <span class="num">04</span>
+          <strong class="diapo-t">A usted le llega solo lo importante</strong>
+          <span class="diapo-p">Reclamos, descuentos y pedidos especiales pasan a usted, con un resumen.</span>
+        </div>
+        <div class="diapo diapo-caja">
+          <div class="pop d1 tarjeta tarjeta-aviso">
+            <span class="para">PARA USTED</span>
+            <strong>Pedido especial</strong>
+            <span class="aviso-p">10 sacos de cemento. Pide descuento.</span>
+            <span class="aviso-btn">Lo respondo yo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+</div>
+
+<div class="claro">
+  <section id="servicios" class="bloque">
+    <h2 class="revela">Elija por dónde empezar</h2>
+    <div class="tabs" role="tablist" aria-label="Servicios" id="tabs">
+      <button type="button" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true">Asistente de WhatsApp</button>
+      <button type="button" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1">Páginas web</button>
+      <button type="button" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1">Automatizaciones</button>
+      <button type="button" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1">Branding</button>
+    </div>
+
+    <div role="tabpanel" id="panel-0" aria-labelledby="tab-0" class="panel diapo-in">
+      <div class="panel-texto">
+        <span class="panel-nombre">Asistente de WhatsApp</span>
+        <span class="panel-p">Atiende a sus clientes a toda hora con sus precios, su catálogo y su horario.</span>
+        <ul class="puntos">
+          <li>Responde al momento, de día y de noche</li>
+          <li>Agenda citas en Google Calendar</li>
+          <li>Le pasa a usted reclamos y pedidos especiales</li>
+        </ul>
+      </div>
+      <div class="panel-precio">
+        <span class="precio">US$49,99</span>
+        <span class="nota-p">al mes, sin instalación</span>
+        <a class="btn-osc" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20saber%20m%C3%A1s">Hablemos por WhatsApp</a>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="panel-1" aria-labelledby="tab-1" class="panel diapo-in" hidden>
+      <div class="panel-texto">
+        <span class="panel-nombre">Páginas web</span>
+        <span class="panel-p">Una página clara y rápida, conectada a su WhatsApp, que explica su negocio en segundos. Como esta.</span>
+        <ul class="puntos">
+          <li>Se ve bien en el celular</li>
+          <li>Botón directo a su WhatsApp</li>
+          <li>Hecha a la medida de su negocio</li>
+        </ul>
+      </div>
+      <div class="panel-precio">
+        <span class="precio">A medida</span>
+        <span class="nota-p">Lo vemos en una llamada de 10 minutos</span>
+        <a class="btn-osc" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20saber%20m%C3%A1s">Hablemos por WhatsApp</a>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" class="panel diapo-in" hidden>
+      <div class="panel-texto">
+        <span class="panel-nombre">Automatizaciones</span>
+        <span class="panel-p">Las tareas que hoy repite a mano, hechas solas: menos errores y más tiempo para su negocio.</span>
+        <ul class="puntos">
+          <li>Cotizaciones y reportes</li>
+          <li>Seguimiento de clientes</li>
+          <li>Pasar datos de un sistema a otro</li>
+        </ul>
+      </div>
+      <div class="panel-precio">
+        <span class="precio">A medida</span>
+        <span class="nota-p">Lo vemos en una llamada de 10 minutos</span>
+        <a class="btn-osc" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20saber%20m%C3%A1s">Hablemos por WhatsApp</a>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="panel-3" aria-labelledby="tab-3" class="panel diapo-in" hidden>
+      <div class="panel-texto">
+        <span class="panel-nombre">Branding</span>
+        <span class="panel-p">Posts y reels con su marca para sus redes, programados cada mes.</span>
+        <ul class="puntos">
+          <li>12 posts al mes</li>
+          <li>Reels con voz en los planes Marca</li>
+          <li>Calendario de publicación</li>
+        </ul>
+      </div>
+      <div class="panel-precio">
+        <span class="precio">Desde US$19</span>
+        <span class="nota-p">al mes</span>
+        <a class="btn-osc" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20saber%20m%C3%A1s">Hablemos por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="blanca">
+    <div class="bloque-in">
+      <h2 class="revela">Pruébelo gratis en 3 pasos</h2>
+      <div class="pasos">
+        <div class="revela paso">
+          <span class="paso-n">1</span>
+          <strong>Nos cuenta de su negocio</strong>
+          <span>Por WhatsApp. Una foto de su lista de precios sirve.</span>
+        </div>
+        <div class="revela paso">
+          <span class="paso-n">2</span>
+          <strong>Ve a su propio asistente</strong>
+          <span>En menos de 24 horas, sin conectar su número.</span>
+        </div>
+        <div class="revela paso">
+          <span class="paso-n">3</span>
+          <strong>Hablamos 10 minutos</strong>
+          <span>Sin costo, cualquier día, a la hora que usted elija.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="preguntas" class="faq">
+    <h2 class="revela">Preguntas frecuentes</h2>
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" id="q-0" aria-expanded="true" aria-controls="a-0"><span>¿Tengo que cambiar mi número?</span><span class="signo" aria-hidden="true">−</span></button></h3>
+      <p class="faq-a b-entra" id="a-0" role="region" aria-labelledby="q-0">No. La prueba gratis no toca su número. Si decide seguir, el asistente atiende en su propio WhatsApp de negocio.</p>
+    </div>
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" id="q-1" aria-expanded="false" aria-controls="a-1"><span>¿Qué pasa si un cliente se enoja o pide algo raro?</span><span class="signo" aria-hidden="true">+</span></button></h3>
+      <p class="faq-a b-entra" id="a-1" role="region" aria-labelledby="q-1" hidden>El asistente le pasa el chat a usted con un resumen, y usted sigue la conversación.</p>
+    </div>
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" id="q-2" aria-expanded="false" aria-controls="a-2"><span>¿Puedo cancelar?</span><span class="signo" aria-hidden="true">+</span></button></h3>
+      <p class="faq-a b-entra" id="a-2" role="region" aria-labelledby="q-2" hidden>Cuando quiera. El plan no se renueva solo.</p>
+    </div>
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" id="q-3" aria-expanded="false" aria-controls="a-3"><span>¿Cuánto cuesta?</span><span class="signo" aria-hidden="true">+</span></button></h3>
+      <p class="faq-a b-entra" id="a-3" role="region" aria-labelledby="q-3" hidden>US$49,99 al mes, sin instalación. La prueba y la llamada son gratis.</p>
+    </div>
+  </section>
+</div>
+
+<section class="cierre">
+  <div class="cierre-in">
+    <h2 class="revela">Vea a su propio asistente <span class="luz">antes de pagar nada.</span></h2>
+    <a class="btn btn-grande" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20la%20prueba%20gratis">Pida su prueba gratis</a>
+  </div>
 </section>
-<section>
-<h2>Planes</h2>
-<p>Plan Básico $19 al mes · Plan Marca $39 al mes · Plan Marca y modelo $79 al mes · SCR Systems $49,99 al mes.</p>
-</section>
-<section>
-<h2>Contacto</h2>
-<p>WhatsApp: +593 98 245 3444<br>Correo: <a href="mailto:contacto@scr-lab.com">contacto@scr-lab.com</a><br>Instagram: @scr.lab1<br>Sangolquí, Pichincha, Ecuador</p>
-</section>
-<section>
-<h2>Privacidad</h2>
-<p>Guardamos tu nombre, tu teléfono y las fotos que envías solo para atenderte. Se borran a los 15 días. Puedes pedir que borremos tus datos escribiendo BORRAR por WhatsApp o al correo. Te atiende un asistente con inteligencia artificial y una persona cuando hace falta. <a href="/privacidad/">Política de privacidad completa</a>.</p>
-</section>
-</main>
-<footer>© 2026 SCR Lab · Titular: Marco Sebastián Cruz Rosero · Sangolquí, Ecuador<br>
-<a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a> · <a href="/cookies/">Cookies</a> · <a href="mailto:contacto@scr-lab.com">contacto@scr-lab.com</a></footer>
+
+<footer class="pie">
+  <div class="pie-fila">
+    <span>© 2026 SCR Lab · Titular: Marco Sebastián Cruz Rosero · Sangolquí, Ecuador</span>
+    <a href="/privacidad/">Privacidad</a>
+    <a href="/terminos/">Términos</a>
+    <a href="/cookies/">Cookies</a>
+    <a href="mailto:contacto@scr-lab.com">contacto@scr-lab.com</a>
+  </div>
+  <div class="pie-fila">
+    <span>WhatsApp: +593 98 245 3444</span>
+    <span>Instagram: @scr.lab1</span>
+  </div>
+  <p class="pie-datos">Guardamos tu nombre, tu teléfono y las fotos que envías solo para atenderte. Se borran a los 15 días. Puedes pedir que borremos tus datos escribiendo BORRAR por WhatsApp o al correo. Te atiende un asistente con inteligencia artificial y una persona cuando hace falta. <a href="/privacidad/">Política de privacidad completa</a>.</p>
+</footer>
+
+<script src="/assets/app.js" defer></script>
 </body>
 </html>
