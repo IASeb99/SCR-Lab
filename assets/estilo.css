@@ -1,3 +1,5 @@
+@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url(/fuentes/InterVariable.woff2) format("woff2")}
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fuentes/SpaceGrotesk-wght.woff2) format("woff2")}
 :root{
   --azul:#0B1F3A;--azul2:#12305A;--azul3:#0F2747;--azul4:#081A31;--azul5:#061227;
   --ac:#1A7F5A;--luz:#6CCB9E;--suave:#E3F2EB;--cliente:#DDF0E4;
