@@ -26,49 +26,45 @@
   <main>
   <section class="hero">
     <div class="hero-texto">
-      <h1>Su negocio contesta por WhatsApp, <span class="luz">aunque usted esté ocupado.</span></h1>
-      <p class="lead">Responde con sus precios y horarios, agenda citas en su calendario y le pasa el chat a usted cuando hace falta.</p>
+      <h1>Un bot que atiende el WhatsApp de su negocio, <span class="luz">como una persona.</span></h1>
+      <p class="lead">Es un bot con inteligencia artificial que conversa con sus clientes, no un mensaje automático: responde con sus precios y horarios, agenda citas en su calendario y le pasa el chat a usted cuando hace falta.</p>
       <div class="hero-cta">
         <a class="btn btn-grande" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20la%20prueba%20gratis">Pida su prueba gratis</a>
-        <span class="aparte">Sin conectar su número todavía.</span>
       </div>
     </div>
 
     <div class="hero-demo">
-      <div class="chips" role="group" aria-label="Elija un tipo de negocio" id="negocios">
-        <button type="button" class="chip" data-neg="cafe" aria-pressed="true">Cafetería</button>
-        <button type="button" class="chip" data-neg="pelu" aria-pressed="false">Peluquería</button>
-        <button type="button" class="chip" data-neg="ferre" aria-pressed="false">Ferretería</button>
+      <div class="chips" role="group" aria-label="Elija un negocio" id="negocios" hidden>
+        <button type="button" class="chip" data-neg="solarte" aria-pressed="true">SolArte</button>
+        <button type="button" class="chip" data-neg="dental" aria-pressed="false">Consultorio dental</button>
       </div>
 
       <div class="celular">
         <div class="celular-marco">
           <div class="celular-pantalla">
             <div class="celular-cab">
-              <div class="avatar" id="inicial" aria-hidden="true">C</div>
-              <div class="celular-quien"><strong id="titulo">Café de la esquina</strong><span id="estado">en línea</span></div>
+              <div class="avatar" id="inicial" aria-hidden="true">S</div>
+              <div class="celular-quien"><strong id="titulo">Bot de SolArte · demo en vivo</strong><span id="estado">en línea</span></div>
             </div>
-            <div class="chat" id="chat" role="group" aria-label="Conversación de ejemplo">
-              <div class="b b-cliente">Hola, ¿hacen delivery?</div>
-              <div class="b b-bot">¡Hola! Sí, hacemos delivery en el sector de 8 am a 6 pm.</div>
-              <div class="b b-cliente">¿Cuánto cuesta el desayuno completo?</div>
-              <div class="b b-bot">El desayuno completo cuesta $4,50. ¿Se lo envío hoy?</div>
-            </div>
+            <div class="chat" id="chat" role="log" aria-label="Conversación con el bot"></div>
+            <form class="escribir" id="form" autocomplete="off" hidden>
+              <label class="solo-lector" for="texto">Escriba su mensaje</label>
+              <input type="text" id="texto" maxlength="300" placeholder="Escriba su pregunta" enterkeyhint="send">
+              <button type="submit" class="enviar" id="enviar" aria-label="Enviar">
+                <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10l14-7-5 14-2-6z" fill="currentColor"></path></svg>
+              </button>
+            </form>
           </div>
         </div>
       </div>
 
-      <div class="notas">
-        <div class="nota flota">
-          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><rect x="2" y="3" width="14" height="13" rx="3" fill="none" stroke="#1A7F5A" stroke-width="2"></rect><path d="M5 9l3 3 5-5" fill="none" stroke="#1A7F5A" stroke-width="2" stroke-linecap="round"></path></svg>
-          Cita agendada
+      <p class="aviso-ia" id="aviso-ia" hidden>Es un bot con inteligencia artificial. No escriba datos personales; la demo no guarda sus mensajes.</p>
+      <div class="demo-pie" id="demo-pie">
+        <p id="demo-pie-txt"></p>
+        <div class="demo-pie-bt">
+          <a class="btn" href="https://wa.me/593982453444?text=Hola%2C%20quiero%20la%20prueba%20gratis">Escr&iacute;banos por WhatsApp</a>
+          <button type="button" class="btn-sec" id="reiniciar" hidden>Empezar de nuevo</button>
         </div>
-        <div class="nota nota-azul flota2">Responde a las 23:41</div>
-      </div>
-
-      <div class="rapidas-zona" id="rapidas-zona" hidden>
-        <span class="aparte" id="rapidas-titulo">Toque una pregunta y vea cómo responde:</span>
-        <div class="rapidas" id="rapidas"></div>
       </div>
     </div>
   </section>
@@ -161,6 +157,29 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="problema" class="problema">
+    <h2 class="revela">Cuando hay un problema</h2>
+    <ol class="tres">
+      <li class="revela tres-p">
+        <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#6CCB9E" stroke-width="2"/><path d="M17 20h22a3 3 0 013 3v10a3 3 0 01-3 3H27l-7 6v-6h-3a3 3 0 01-3-3V23a3 3 0 013-3z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M28 25v5M28 33v.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <span class="tres-n">1</span>
+        <strong>Un cliente reclama o pide algo especial</strong>
+      </li>
+      <li class="flecha" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M6 16h18M17 8l8 8-8 8" fill="none" stroke="#6CCB9E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+      <li class="revela tres-p">
+        <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#6CCB9E" stroke-width="2"/><rect x="16" y="14" width="24" height="28" rx="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M21 22h14M21 28h14M21 34h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="tres-n">2</span>
+        <strong>El bot le responde con calma y le avisa a usted con un resumen</strong>
+      </li>
+      <li class="flecha" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M6 16h18M17 8l8 8-8 8" fill="none" stroke="#6CCB9E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+      <li class="revela tres-p">
+        <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#6CCB9E" stroke-width="2"/><path d="M14 36l6-4V19h22v14H26z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M26 25h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="tres-n">3</span>
+        <strong>Usted contesta desde su WhatsApp y sigue la conversación</strong>
+      </li>
+    </ol>
   </section>
   </main>
 </div>
@@ -270,6 +289,34 @@
     </div>
   </section>
 
+  <section id="entrega" class="blanca">
+    <div class="bloque-in">
+      <h2 class="revela">Cómo se lo entregamos</h2>
+      <div class="pasos pasos4">
+        <div class="revela paso">
+          <span class="paso-n">1</span>
+          <strong>Nos manda sus datos</strong>
+          <span>Nos manda por WhatsApp sus precios, horarios y productos (una foto de la lista sirve).</span>
+        </div>
+        <div class="revela paso">
+          <span class="paso-n">2</span>
+          <strong>Armamos su bot</strong>
+          <span>En menos de 24 horas armamos su bot y lo prueba en su celular.</span>
+        </div>
+        <div class="revela paso">
+          <span class="paso-n">3</span>
+          <strong>Lo conectamos</strong>
+          <span>Lo conectamos a su WhatsApp de negocio y queda atendiendo.</span>
+        </div>
+        <div class="revela paso">
+          <span class="paso-n">4</span>
+          <strong>Lo mantenemos al día</strong>
+          <span>Si cambia precios u horarios, nos escribe y lo actualizamos.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="blanca">
     <div class="bloque-in">
       <h2 class="revela">Pruébelo gratis en 3 pasos</h2>
@@ -323,7 +370,7 @@
 
 <footer class="pie">
   <div class="pie-fila">
-    <span>© 2026 SCR Lab · Titular: Marco Sebastián Cruz Rosero · Sangolquí, Ecuador</span>
+    <span>© 2026 SCR Lab · Sangolquí, Ecuador</span>
     <a href="/privacidad/">Privacidad</a>
     <a href="/terminos/">Términos</a>
     <a href="/cookies/">Cookies</a>
@@ -337,6 +384,7 @@
 </footer>
 
 <div class="solo-lector" id="anuncio" role="status" aria-live="polite" aria-atomic="true"></div>
+<script src="/assets/config.js"></script>
 <script src="/assets/app.js" defer></script>
 </body>
 </html>

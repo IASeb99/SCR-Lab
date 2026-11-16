@@ -1,0 +1,9 @@
+{
+  "_nota": "PENDIENTE: texto de relleno. La conversación real la genera después la prueba con el modelo. Nunca usar conversaciones de clientes reales.",
+  "mensajes": [
+    {"de": "c", "texto": "PENDIENTE: pregunta del cliente sobre las clases."},
+    {"de": "b", "texto": "PENDIENTE: respuesta del bot de SolArte con horarios y precios."},
+    {"de": "c", "texto": "PENDIENTE: el cliente pide reservar."},
+    {"de": "b", "texto": "PENDIENTE: el bot confirma en simulado y se despide."}
+  ]
+}

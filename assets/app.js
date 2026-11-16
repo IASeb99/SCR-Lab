@@ -9,64 +9,60 @@
   function $(s, ctx) { return (ctx || document).querySelector(s); }
   function $$(s, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(s)); }
 
-  /* ---------- chat del celular ---------- */
-  var DATOS = {
-    cafe: { titulo: 'Café de la esquina', inicial: 'C', chat: [
-      ['c', 'Hola, ¿hacen delivery?'],
-      ['b', '¡Hola! Sí, hacemos delivery en el sector de 8 am a 6 pm.'],
-      ['c', '¿Cuánto cuesta el desayuno completo?'],
-      ['b', 'El desayuno completo cuesta $4,50. ¿Se lo envío hoy?']
-    ], rapidas: [
-      ['¿Abren el domingo?', 'Sí, el domingo abrimos de 8:00 a 14:00.'],
-      ['¿Tienen algo sin gluten?', 'Sí: pan sin gluten y bowls de fruta. ¿Le agrego alguno a su pedido?'],
-      ['Quiero hablar con el dueño', 'Claro, ya le aviso. Le escribe en unos minutos.']
-    ] },
-    pelu: { titulo: 'Peluquería Bella', inicial: 'B', chat: [
-      ['c', '¿Tienen turno mañana?'],
-      ['b', 'Sí: 10:00, 11:30 o 16:00. ¿Cuál le queda mejor?'],
-      ['c', 'A las 11:30'],
-      ['b', 'Listo, mañana 11:30. ¿Le recuerdo un día antes?']
-    ], rapidas: [
-      ['¿Cuánto cuesta el corte?', 'El corte cuesta $8 y con lavado $10. ¿Le reservo un turno?'],
-      ['¿Atienden el domingo?', 'El domingo no abrimos. ¿Le sirve el sábado a las 10:00?'],
-      ['Quiero hablar con alguien', 'Claro, ya le aviso a la dueña. Le escribe en unos minutos.']
-    ] },
-    ferre: { titulo: 'Ferretería El Tornillo', inicial: 'T', chat: [
-      ['c', '¿Tienen cemento?'],
-      ['b', 'Sí. El saco de 50 kg está en $8,20. ¿Cuántos necesita?'],
-      ['c', 'Diez, ¿me hacen descuento?'],
-      ['b', 'Eso se lo confirma el dueño. Ya le pasé su pedido.']
-    ], rapidas: [
-      ['¿Hacen entregas?', 'Sí, entregamos en el valle. ¿A qué sector sería?'],
-      ['¿Hasta qué hora abren?', 'Abrimos de lunes a sábado, de 7:30 a 18:00.'],
-      ['¿Tienen pintura blanca?', 'Sí, en galón y en caneca. ¿Para interior o exterior?']
-    ] }
+  /* ---------- chat del hero: demo en vivo o conversación fija ---------- */
+  var CFG = window.SCR_DEMO || {};
+  var BASE = String(CFG.base || '').replace(/\/+$/, '');
+  var NEG = {
+    solarte: {
+      titulo: 'Bot de SolArte · demo en vivo', inicial: 'S', para: 'la dueña de SolArte',
+      saludo: 'Hola, soy el asistente de SolArte. Pregúnteme por las clases o por los precios.'
+    },
+    dental: {
+      titulo: 'Bot del consultorio · demo en vivo', inicial: 'C', para: 'el dentista del consultorio',
+      saludo: 'Hola, soy el asistente de ' + (CFG.consultorio || 'el consultorio') + '. ¿Quiere agendar una cita o saber los horarios?'
+    }
   };
-  var MAX_VISIBLES = 6;
+  var MAX_VISIBLES = 12;
+  var DESCANSO = 'La demo descansó por hoy. Escríbanos por WhatsApp y se la mostramos.';
 
   var chatEl = $('#chat');
   var estadoEl = $('#estado');
   var tituloEl = $('#titulo');
   var inicialEl = $('#inicial');
-  var rapidasEl = $('#rapidas');
-  var rapidasZona = $('#rapidas-zona');
   var chips = $$('#negocios .chip');
+  var chipsEl = $('#negocios');
+  var formEl = $('#form');
+  var textoEl = $('#texto');
+  var enviarEl = $('#enviar');
+  var avisoIa = $('#aviso-ia');
+  var pieEl = $('#demo-pie');
+  var pieTxt = $('#demo-pie-txt');
+  var reiniciarEl = $('#reiniciar');
+  var anuncioEl = $('#anuncio');
 
-  var neg = 'cafe';
+  var neg = 'solarte';
+  var vivo = false;
   var token = 0;
   var timers = [];
-  var pendiente = false;
+  var ocupado = false;
   var typingEl = null;
+  var convId = '';
+  var enviados = 0;
 
   function later(fn, ms) {
     var t = token;
-    var id = setTimeout(function () { if (t === token) fn(); }, ms);
-    timers.push(id);
+    timers.push(setTimeout(function () { if (t === token) fn(); }, ms));
   }
-  function cancelar() {
-    token++;
-    timers.forEach(clearTimeout);
-    timers = [];
+  function cancelar() { token++; timers.forEach(clearTimeout); timers = []; }
+  function anunciar(texto) { anuncioEl.textContent = ''; setTimeout(function () { anuncioEl.textContent = texto; }, 50); }
+  function nuevoId() {
+    var a = '';
+    try {
+      var u = new Uint8Array(12);
+      window.crypto.getRandomValues(u);
+      for (var i = 0; i < u.length; i++) a += ('0' + u[i].toString(16)).slice(-2);
+    } catch (e) { a = String(Date.now()) + Math.random().toString(16).slice(2); }
+    return a;
   }
   function burbuja(de, texto) {
     var d = document.createElement('div');
@@ -75,6 +71,17 @@
     chatEl.appendChild(d);
     var burb = $$('.b', chatEl);
     while (burb.length > MAX_VISIBLES) { chatEl.removeChild(burb.shift()); }
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+  function tarjeta(resumen) {
+    var d = document.createElement('div');
+    d.className = 'tarjeta tarjeta-aviso b-entra';
+    var p = document.createElement('span'); p.className = 'para'; p.textContent = 'PARA USTED';
+    var t = document.createElement('strong'); t.textContent = 'Esto le llegaría a ' + NEG[neg].para;
+    var r = document.createElement('span'); r.className = 'aviso-p'; r.textContent = resumen;
+    d.appendChild(p); d.appendChild(t); d.appendChild(r);
+    chatEl.appendChild(d);
+    chatEl.scrollTop = chatEl.scrollHeight;
   }
   function escribiendo(on) {
     if (on && !typingEl) {
@@ -83,102 +90,165 @@
       typingEl.setAttribute('aria-hidden', 'true');
       typingEl.innerHTML = '<span class="punto"></span><span class="punto"></span><span class="punto"></span>';
       chatEl.appendChild(typingEl);
+      chatEl.scrollTop = chatEl.scrollHeight;
     } else if (!on && typingEl) {
-      chatEl.removeChild(typingEl);
+      if (typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
       typingEl = null;
     }
     estadoEl.textContent = on ? 'escribiendo…' : 'en línea';
   }
-  var anuncioEl = $('#anuncio');
-  function anunciar(texto) { anuncioEl.textContent = ''; setTimeout(function () { anuncioEl.textContent = texto; }, 50); }
   function limpiarChat() {
     typingEl = null;
     while (chatEl.firstChild) chatEl.removeChild(chatEl.firstChild);
   }
-  function pintarRapidas() {
-    var d = DATOS[neg];
-    rapidasEl.textContent = '';
-    d.rapidas.forEach(function (r) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'rapida';
-      b.textContent = r[0];
-      b.addEventListener('click', function () { preguntar(r[0], r[1], b); });
-      rapidasEl.appendChild(b);
-    });
-    rapidasZona.hidden = false;
-  }
   function cabecera() {
-    var d = DATOS[neg];
+    var d = NEG[neg];
     tituloEl.textContent = d.titulo;
     inicialEl.textContent = d.inicial;
     chips.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-neg') === neg ? 'true' : 'false'); });
   }
-  function reproducir() {
-    var d = DATOS[neg].chat;
+  function pie(texto, conReiniciar) {
+    pieTxt.textContent = texto;
+    reiniciarEl.hidden = !conReiniciar;
+    pieEl.hidden = false;
+  }
+  function cerrarEntrada(motivo) {
+    formEl.hidden = true;
+    pie(motivo, true);
+  }
+
+  /* conversación fija (demo apagado) */
+  function mostrarFija() {
+    vivo = false;
     cancelar();
     limpiarChat();
     escribiendo(false);
-    if (quieto) {
-      d.forEach(function (m) { burbuja(m[0], m[1]); });
-      return;
-    }
-    burbuja(d[0][0], d[0][1]);
+    chipsEl.hidden = true;
+    formEl.hidden = true;
+    avisoIa.hidden = true;
+    neg = 'solarte';
+    cabecera();
+    tituloEl.textContent = 'Bot de SolArte';
+    pie('Así conversa el bot. Pídanos su prueba gratis y lo ve con su propio negocio.', false);
+    fetch('/assets/conversacion-solarte.json', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error('x'); return r.json(); })
+      .then(function (j) { reproducirFija(j.mensajes || []); })
+      .catch(function () { pie('Escríbanos por WhatsApp y le mostramos cómo conversa el bot.', false); });
+  }
+  function reproducirFija(d) {
+    if (!d.length) return;
+    if (quieto) { d.forEach(function (m) { burbuja(m.de, m.texto); }); return; }
+    burbuja(d[0].de, d[0].texto);
     var i = 1;
     (function paso() {
-      if (i >= d.length) {
-        later(function () { reproducir(); }, 5000);
-        return;
-      }
+      if (i >= d.length) return;
       var m = d[i];
-      if (m[0] === 'b') {
+      if (m.de === 'b') {
         escribiendo(true);
-        later(function () { escribiendo(false); burbuja(m[0], m[1]); i++; paso(); }, 1100);
+        later(function () { escribiendo(false); burbuja(m.de, m.texto); i++; paso(); }, 1200);
       } else {
-        later(function () { burbuja(m[0], m[1]); i++; paso(); }, 1000);
+        later(function () { burbuja(m.de, m.texto); i++; paso(); }, 1400);
       }
     })();
   }
-  function preguntar(q, a, boton) {
-    if (pendiente) return;
-    var yaVistos = $$('.b', chatEl).length;
-    var base = DATOS[neg].chat;
+
+  /* demo en vivo */
+  function iniciarVivo() {
+    vivo = true;
     cancelar();
+    limpiarChat();
     escribiendo(false);
-    if (yaVistos < base.length && yaVistos < MAX_VISIBLES) {
-      for (var k = yaVistos; k < base.length; k++) burbuja(base[k][0], base[k][1]);
-    }
-    var sig = boton.nextElementSibling || boton.previousElementSibling;
-    rapidasEl.removeChild(boton);
-    if (sig) sig.focus();
-    burbuja('c', q);
-    anunciar('Usted: ' + q);
-    if (!rapidasEl.children.length) rapidasZona.hidden = true;
-    if (quieto) { burbuja('b', a); anunciar('Respuesta: ' + a); return; }
-    pendiente = true;
-    escribiendo(true);
-    var t = token;
-    var id = setTimeout(function () {
-      if (t !== token) return;
-      escribiendo(false);
-      burbuja('b', a);
-      anunciar('Respuesta: ' + a);
-      pendiente = false;
-    }, 1200);
-    timers.push(id);
-  }
-  function elegirNegocio(id) {
-    if (id === neg) return;
-    neg = id;
-    pendiente = false;
+    ocupado = false;
+    enviados = 0;
+    convId = nuevoId();
+    chipsEl.hidden = false;
+    formEl.hidden = false;
+    avisoIa.hidden = false;
+    pieEl.hidden = true;
+    enviarEl.disabled = false;
+    textoEl.disabled = false;
     cabecera();
-    pintarRapidas();
-    reproducir();
+    burbuja('b', NEG[neg].saludo);
   }
-  chips.forEach(function (c) { c.addEventListener('click', function () { elegirNegocio(c.getAttribute('data-neg')); }); });
-  cabecera();
-  pintarRapidas();
-  reproducir();
+  function llamar(ruta, opciones) {
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var tm = setTimeout(function () { if (ctl) ctl.abort(); }, 45000);
+    var o = opciones || {};
+    if (ctl) o.signal = ctl.signal;
+    return fetch(BASE + ruta, o).then(function (r) { clearTimeout(tm); return r; }, function (e) { clearTimeout(tm); throw e; });
+  }
+  function respuestaTexto(x) { return typeof x === 'string' ? x : (x && x.texto) || ''; }
+  function enviar(texto) {
+    if (ocupado || !texto) return;
+    ocupado = true;
+    enviarEl.disabled = true;
+    burbuja('c', texto);
+    anunciar('Usted: ' + texto);
+    escribiendo(true);
+    var cab = { 'Content-Type': 'application/json' };
+    if (CFG.clave) cab['X-Demo-Clave'] = CFG.clave;
+    var miConv = convId;
+    llamar('/demo/mensaje', { method: 'POST', headers: cab, body: JSON.stringify({ negocio: neg, conversacionId: convId, texto: texto }) })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) { return { s: r.status, j: j }; });
+      })
+      .then(function (x) {
+        if (miConv !== convId) return;
+        escribiendo(false);
+        if (x.s === 200 && x.j && x.j.ok) {
+          enviados++;
+          (x.j.respuestas || []).forEach(function (t) { var s = respuestaTexto(t); if (s) { burbuja('b', s); anunciar('Respuesta: ' + s); } });
+          if (x.j.tarjeta && x.j.tarjeta.resumen) tarjeta(x.j.tarjeta.resumen);
+          if (typeof x.j.restantes === 'number' && x.j.restantes <= 0) { cerrarEntrada('Llegó al límite de mensajes de esta demo. Puede empezar de nuevo o escribirnos por WhatsApp.'); return; }
+        } else if (x.s === 429 || x.s === 503) {
+          burbuja('b', (x.j && x.j.mensaje) || DESCANSO);
+          cerrarEntrada(DESCANSO);
+          return;
+        } else if (x.s === 401) {
+          burbuja('b', 'La demo no está disponible en este momento.');
+          cerrarEntrada('La demo no está disponible. Escríbanos por WhatsApp y se la mostramos.');
+          return;
+        } else {
+          burbuja('b', 'No pude responder ahora. Intente de nuevo.');
+        }
+        ocupado = false;
+        enviarEl.disabled = false;
+        textoEl.focus();
+      })
+      .catch(function () {
+        if (miConv !== convId) return;
+        escribiendo(false);
+        burbuja('b', 'No pude conectar. Intente de nuevo en un momento.');
+        ocupado = false;
+        enviarEl.disabled = false;
+      });
+  }
+  formEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var t = textoEl.value.replace(/\s+/g, ' ').trim();
+    if (!t) return;
+    textoEl.value = '';
+    enviar(t);
+  });
+  reiniciarEl.addEventListener('click', function () { iniciarVivo(); textoEl.focus(); });
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      var id = c.getAttribute('data-neg');
+      if (id === neg || !vivo) return;
+      neg = id;
+      iniciarVivo();
+    });
+  });
+
+  if (!BASE) {
+    mostrarFija();
+  } else {
+    estadoEl.textContent = 'conectando…';
+    llamar('/demo/estado', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (j && j.abierto) iniciarVivo(); else mostrarFija(); })
+      .catch(function () { mostrarFija(); });
+  }
 
   /* ---------- Así trabaja por usted ---------- */
   var slides = $$('#diapos .slide');
@@ -201,7 +271,7 @@
     icoPausa.hidden = !auto;
     icoPlay.hidden = auto;
     clearTimeout(slideTimer);
-    if (auto) slideTimer = setTimeout(function () { actual = (actual + 1) % slides.length; pintarSlides(); }, 5000);
+    if (auto) slideTimer = setTimeout(function () { actual = (actual + 1) % slides.length; pintarSlides(); }, 10000);
   }
   function ir(i) { actual = (i + slides.length) % slides.length; auto = false; pintarSlides(); }
   $('#anterior').addEventListener('click', function () { ir(actual - 1); });
