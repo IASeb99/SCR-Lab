@@ -3,6 +3,6 @@
 window.SCR_DEMO = {
   base: '',
   clave: '',
-  /* PENDIENTE: nombre inventado del consultorio (lo elige otra hija). Único lugar donde vive. */
-  consultorio: 'PENDIENTE nombre del consultorio'
+  /* Nombre inventado del consultorio. Unico lugar donde vive. */
+  consultorio: 'Consultorio Dental Cumbre Clara'
 };

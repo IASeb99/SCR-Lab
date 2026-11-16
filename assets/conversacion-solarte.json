@@ -1,9 +1,45 @@
 {
-  "_nota": "PENDIENTE: texto de relleno. La conversación real la genera después la prueba con el modelo. Nunca usar conversaciones de clientes reales.",
+  "_nota": "Conversacion de una prueba con el modelo (16 nov 2026), mensajes inventados; nunca de clientes reales.",
   "mensajes": [
-    {"de": "c", "texto": "PENDIENTE: pregunta del cliente sobre las clases."},
-    {"de": "b", "texto": "PENDIENTE: respuesta del bot de SolArte con horarios y precios."},
-    {"de": "c", "texto": "PENDIENTE: el cliente pide reservar."},
-    {"de": "b", "texto": "PENDIENTE: el bot confirma en simulado y se despide."}
+    {
+      "de": "c",
+      "texto": "Hola, buenas tardes"
+    },
+    {
+      "de": "b",
+      "texto": "Puedo contarle sobre nuestros cursos de pintura y manualidades, o sobre precios. ¿Qué le gustaría aprender?"
+    },
+    {
+      "de": "c",
+      "texto": "Qué cursos tienen y cuánto cuestan?"
+    },
+    {
+      "de": "b",
+      "texto": "Tenemos cursos de óleo, acrílico, espátula, acuarela, relieve, arte abstracto, deco en madera/tela/cerámica, puntillismo y uno para principiantes. Cada curso son 5 clases presenciales y cuesta US$25 (los materiales no están incluidos, dependen del proyecto). ¿Cuál le llama la atención?"
+    },
+    {
+      "de": "c",
+      "texto": "Cuánto cuesta la caja de MDF para botella con tapa?"
+    },
+    {
+      "de": "b",
+      "texto": "La caja de MDF para botella con tapa acrílica, con grabado láser de un sello y un nombre, cuesta US$6,50 por unidad. ¿Busca algo para un diseño o medida en particular?"
+    },
+    {
+      "de": "c",
+      "texto": "Quiero reservar el curso de acuarela, hay cupo el lunes?"
+    },
+    {
+      "de": "b",
+      "texto": "Tengo disponible el lunes 23 de noviembre, 9:00 am (hora de Ecuador) para el curso de acuarela. ¿Le reservo ese horario?"
+    },
+    {
+      "de": "c",
+      "texto": "Compré una caja la semana pasada y llegó con el grabado torcido, quiero un reclamo"
+    },
+    {
+      "de": "b",
+      "texto": "Gracias, ya le paso esto a la dueña y ella le escribe por aquí en unos minutos."
+    }
   ]
 }
