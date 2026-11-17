@@ -140,7 +140,7 @@
     neg = 'solarte';
     cabecera();
     tituloEl.textContent = 'Atención de SolArte';
-    pie('Así conversa la atención. Con su propio negocio se vería igual.', false);
+    pie('Así contestamos. Con su propio negocio se vería igual.', false);
     fetch('/assets/conversacion-solarte.json', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error('x'); return r.json(); })
       .then(function (j) { reproducirFija(j.mensajes || []); })
