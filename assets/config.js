@@ -6,3 +6,7 @@ window.SCR_DEMO = {
   /* Nombre inventado del consultorio. Unico lugar donde vive. */
   consultorio: 'Consultorio Dental Cumbre Clara'
 };
+
+/* Enlace de WhatsApp de la web. Vacio = ningun boton de WhatsApp se ve.
+   Lleno (por ejemplo 'https://wa.me/593XXXXXXXXX') = aparecen todos, con el texto de cada uno. */
+window.SCR_WEB = { whatsapp_enlace: '' };

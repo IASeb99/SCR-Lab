@@ -9,6 +9,17 @@
   function $(s, ctx) { return (ctx || document).querySelector(s); }
   function $$(s, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(s)); }
 
+  /* ---------- botones de WhatsApp: solo si whatsapp_enlace tiene valor ---------- */
+  (function () {
+    var enlace = String((window.SCR_WEB && window.SCR_WEB.whatsapp_enlace) || '').trim();
+    if (!enlace) return;
+    $$('a[data-wa]').forEach(function (b) {
+      var t = b.getAttribute('data-wa');
+      b.href = enlace + (t ? (enlace.indexOf('?') < 0 ? '?' : '&') + 'text=' + encodeURIComponent(t) : '');
+      b.hidden = false;
+    });
+  })();
+
   /* ---------- chat del hero: demo en vivo o conversación fija ---------- */
   var CFG = window.SCR_DEMO || {};
   var BASE = String(CFG.base || '').replace(/\/+$/, '');
@@ -23,7 +34,7 @@
     }
   };
   var MAX_VISIBLES = 12;
-  var DESCANSO = 'La demo descansó por hoy. Escríbanos por WhatsApp y se la mostramos.';
+  var DESCANSO = 'La demo descansó por hoy. Pídale al vendedor que se la muestre otra vez mañana.';
 
   var chatEl = $('#chat');
   var estadoEl = $('#estado');
@@ -129,11 +140,11 @@
     neg = 'solarte';
     cabecera();
     tituloEl.textContent = 'Bot de SolArte';
-    pie('Así conversa el bot. Pídanos su prueba gratis y lo ve con su propio negocio.', false);
+    pie('Así conversa el bot. Con su propio negocio se vería igual.', false);
     fetch('/assets/conversacion-solarte.json', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error('x'); return r.json(); })
       .then(function (j) { reproducirFija(j.mensajes || []); })
-      .catch(function () { pie('Escríbanos por WhatsApp y le mostramos cómo conversa el bot.', false); });
+      .catch(function () { pie('La demo descansó por hoy. Pídale al vendedor que se la muestre otra vez mañana.', false); });
   }
   function reproducirFija(d) {
     if (!d.length) return;
@@ -199,14 +210,14 @@
           enviados++;
           (x.j.respuestas || []).forEach(function (t) { var s = respuestaTexto(t); if (s) { burbuja('b', s); anunciar('Respuesta: ' + s); } });
           if (x.j.tarjeta && x.j.tarjeta.resumen) tarjeta(x.j.tarjeta.resumen);
-          if (typeof x.j.restantes === 'number' && x.j.restantes <= 0) { cerrarEntrada('Llegó al límite de mensajes de esta demo. Puede empezar de nuevo o escribirnos por WhatsApp.'); return; }
+          if (typeof x.j.restantes === 'number' && x.j.restantes <= 0) { cerrarEntrada('Llegó al límite de mensajes de esta demo. Puede empezar de nuevo.'); return; }
         } else if (x.s === 429 || x.s === 503) {
           burbuja('b', (x.j && x.j.mensaje) || DESCANSO);
           cerrarEntrada(DESCANSO);
           return;
         } else if (x.s === 401) {
           burbuja('b', 'La demo no está disponible en este momento.');
-          cerrarEntrada('La demo no está disponible. Escríbanos por WhatsApp y se la mostramos.');
+          cerrarEntrada('La demo no está disponible por ahora. Pídale al vendedor que se la muestre otra vez mañana.');
           return;
         } else {
           burbuja('b', 'No pude responder ahora. Intente de nuevo.');
