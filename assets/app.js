@@ -22,7 +22,8 @@
 
   /* ---------- chat del hero: demo en vivo o conversación fija ---------- */
   var CFG = window.SCR_DEMO || {};
-  var BASE = String(CFG.base || '').replace(/\/+$/, '');
+  /* El inicio usa siempre la conversación fija: el demo solo acepta su propio origen. */
+  var BASE = '';
   var NEG = {
     solarte: {
       titulo: 'Atención de SolArte · demo en vivo', inicial: 'S', para: 'la dueña de SolArte',
