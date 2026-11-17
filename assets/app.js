@@ -25,11 +25,11 @@
   var BASE = String(CFG.base || '').replace(/\/+$/, '');
   var NEG = {
     solarte: {
-      titulo: 'Bot de SolArte · demo en vivo', inicial: 'S', para: 'la dueña de SolArte',
+      titulo: 'Atención de SolArte · demo en vivo', inicial: 'S', para: 'la dueña de SolArte',
       saludo: 'Hola, soy el asistente de SolArte. Pregúnteme por las clases o por los precios.'
     },
     dental: {
-      titulo: 'Bot del consultorio · demo en vivo', inicial: 'C', para: 'el dentista del consultorio',
+      titulo: 'Atención del consultorio · demo en vivo', inicial: 'C', para: 'el dentista del consultorio',
       saludo: 'Hola, soy el asistente de ' + (CFG.consultorio || 'el consultorio') + '. ¿Quiere agendar una cita o saber los horarios?'
     }
   };
@@ -139,8 +139,8 @@
     avisoIa.hidden = true;
     neg = 'solarte';
     cabecera();
-    tituloEl.textContent = 'Bot de SolArte';
-    pie('Así conversa el bot. Con su propio negocio se vería igual.', false);
+    tituloEl.textContent = 'Atención de SolArte';
+    pie('Así conversa la atención. Con su propio negocio se vería igual.', false);
     fetch('/assets/conversacion-solarte.json', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error('x'); return r.json(); })
       .then(function (j) { reproducirFija(j.mensajes || []); })
