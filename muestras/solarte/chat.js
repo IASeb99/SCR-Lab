@@ -103,7 +103,7 @@
       if (r.estado === 429) return { fallo: r.cuerpo.mensaje || 'Demasiados intentos. Espere unos minutos.' };
       if (r.estado === 503) {
         fijarWa(r.cuerpo && r.cuerpo.whatsapp);
-        return { fallo: r.cuerpo.mensaje || 'La demo descansó por hoy.', wa: true };
+        return { fallo: 'La demo descansó por hoy. Pídale al vendedor que se la muestre otra vez mañana.', wa: true };
       }
       return { fallo: 'No se pudo abrir el chat. Intente otra vez en un momento.' };
     }).catch(function () { return { fallo: 'No se pudo abrir el chat. Revise su conexión e intente otra vez.' }; });
@@ -187,7 +187,7 @@
       } else if (r.estado === 503) {
         fijarWa(c.whatsapp);
         recuperar('');
-        avisar('La demo descansó por hoy.', { wa: true });
+        avisar('La demo descansó por hoy. Pídale al vendedor que se la muestre otra vez mañana.', { wa: true });
         bloquear(true);
       } else {
         recuperar('No se pudo enviar, intente otra vez.');

@@ -100,7 +100,7 @@
       $('msgs').textContent = '';
       $('form').hidden = true;
       if (res === '401') fin('Su sesión venció. Entre de nuevo para seguir.', { entrar: true });
-      else if (res === '503') fin('La demo descansó. Puede escribirnos por WhatsApp.', { wa: true });
+      else if (res === '503') fin('La demo descansó por hoy. Pídale al vendedor que se la muestre otra vez mañana.', { wa: true });
       else fin('No se pudo abrir el chat. Intente otra vez en un momento.', { nuevo: true });
     });
   }
@@ -138,7 +138,7 @@
       h.mensajes.pop();
       if (r.estado === 401) { fin('Su sesión venció. Entre de nuevo para seguir.', { entrar: true }); return; }
       if (r.estado === 429) { fin('Llegó al límite de mensajes de esta conversación.', { nuevo: true }); return; }
-      if (r.estado === 503) { ponerWa(r.cuerpo && r.cuerpo.whatsapp); fin('La demo descansó. Puede escribirnos por WhatsApp.', { wa: true }); return; }
+      if (r.estado === 503) { ponerWa(r.cuerpo && r.cuerpo.whatsapp); fin('La demo descansó por hoy. Pídale al vendedor que se la muestre otra vez mañana.', { wa: true }); return; }
       campo.value = texto;
       pintar();
       estado('No se pudo enviar, intente otra vez.');
