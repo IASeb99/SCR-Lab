@@ -1,0 +1,130 @@
+:root{
+  --verde:#2f5d57; --verde-2:#3f7a72; --salvia:#dfe9e2; --arena:#f6efe2; --crema:#fbf7ef;
+  --tinta:#1f2a28; --suave:#4d5b58; --acento:#c4623f; --acento-h:#a94f30; --borde:#d9d3c4;
+  --r:18px;
+  --fuente:"Avenir Next","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Roboto,Arial,sans-serif;
+  --titulo:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--crema);color:var(--tinta);font:17px/1.6 var(--fuente);overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3{font-family:var(--titulo);line-height:1.15;margin:0 0 .5em;color:var(--verde)}
+h1{font-size:clamp(2rem,8vw,3.4rem);font-weight:700;letter-spacing:-.01em}
+h1 span{color:var(--acento);font-style:italic}
+h2{font-size:clamp(1.6rem,5.5vw,2.2rem)}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.salto{position:absolute;left:-999px;top:0;background:#fff;padding:10px 14px;z-index:99}
+.salto:focus{left:8px;top:8px}
+.solo-lector{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+
+.cab{position:sticky;top:0;z-index:20;background:rgba(251,247,239,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--borde)}
+.cab__in{max-width:1040px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--verde)}
+.marca__txt{display:flex;flex-direction:column;line-height:1.1}
+.marca__txt b{font-family:var(--titulo);font-size:1.2rem}
+.marca__txt small{font-size:.75rem;color:var(--suave);letter-spacing:.06em;text-transform:uppercase}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;border:2px solid transparent;font:600 1rem var(--fuente);text-decoration:none;cursor:pointer;text-align:center}
+.btn[hidden]{display:none}
+.btn--main{background:var(--acento);color:#fff}
+.btn--main:hover{background:var(--acento-h)}
+.btn--sec{background:transparent;color:var(--verde);border-color:var(--verde)}
+.btn--sec:hover{background:var(--salvia)}
+.btn--wa{background:var(--verde);color:#fff;min-height:44px;padding:0 18px}
+.btn--wa:hover{background:var(--verde-2)}
+.btn--claro{background:var(--crema);color:var(--verde)}
+.btn--claro:hover{background:#fff}
+
+.hero{max-width:1040px;margin:0 auto;padding:28px 16px 40px;display:grid;gap:24px}
+.chip{display:inline-block;background:var(--salvia);color:var(--verde);font-weight:600;font-size:.85rem;padding:6px 14px;border-radius:999px;margin-bottom:16px}
+.lead{font-size:1.1rem;color:var(--suave);max-width:36em}
+.acciones{display:flex;flex-direction:column;gap:12px;margin:22px 0 16px}
+.aviso{font-size:.95rem;color:var(--suave);border-left:4px solid var(--acento);padding:4px 0 4px 12px;margin:0}
+.hero__img{margin:0}
+.hero__img img{width:100%;border-radius:var(--r) var(--r) 120px var(--r);aspect-ratio:4/3;object-fit:cover;box-shadow:0 18px 40px -22px rgba(31,42,40,.5)}
+
+.sec{padding:48px 0}
+.sec--arena{background:var(--arena)}
+.sec--verde{background:var(--verde);color:#eef4f0}
+.sec--verde h2{color:#fff}
+.sub{color:var(--suave)}
+.tarjetas{display:grid;gap:16px;margin:20px 0 28px}
+.serv{background:#fff;border:1px solid var(--borde);border-radius:var(--r);padding:22px}
+.serv p{color:var(--suave)}
+.serv__pie{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 0!important;padding-top:12px;border-top:1px dashed var(--borde)}
+.precio{font-family:var(--titulo);font-size:1.7rem;font-weight:700;color:var(--verde)}
+.dur{font-size:.9rem;color:var(--suave)}
+.otros{background:var(--salvia);border-radius:var(--r);padding:22px}
+.otros p{color:var(--suave)}
+.pildoras{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pildoras li{background:#fff;border-radius:999px;padding:6px 14px;font-size:.95rem;color:var(--verde);font-weight:500}
+
+.pasos{list-style:none;counter-reset:p;margin:20px 0;padding:0;display:grid;gap:14px}
+.pasos li{counter-increment:p;position:relative;background:#fff;border-radius:var(--r);padding:16px 16px 16px 66px;display:flex;flex-direction:column}
+.pasos li::before{content:counter(p);position:absolute;left:16px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font-weight:700}
+.pasos span{color:var(--suave);font-size:.95rem}
+.nota{font-size:.92rem;color:var(--suave)}
+.dos{display:grid;gap:28px}
+.horas{margin:12px 0}
+.horas div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--borde)}
+.horas dt{font-weight:600}
+.horas dd{margin:0;text-align:right;color:var(--suave)}
+.ubic{font-size:1.2rem;font-family:var(--titulo);color:var(--verde);margin-bottom:.3em}
+.foto-lado{border-radius:var(--r);margin-top:16px;width:100%;aspect-ratio:3/2;object-fit:cover}
+.foto-lado--b{margin:0 0 20px}
+.foto-v{border-radius:var(--r);width:100%;max-height:420px;object-fit:cover}
+.sec--verde p{color:#d6e4dc}
+.pie{padding:28px 0 96px;background:var(--arena);border-top:1px solid var(--borde)}
+.pie p{margin:0 0 4px}
+
+.flota{position:fixed;right:16px;bottom:16px;z-index:30;min-height:52px;padding:0 22px;border:0;border-radius:999px;background:var(--acento);color:#fff;font:700 1rem var(--fuente);box-shadow:0 10px 26px -8px rgba(0,0,0,.45);cursor:pointer}
+.flota:hover{background:var(--acento-h)}
+
+.chat{position:fixed;inset:0;z-index:50;background:rgba(31,42,40,.55);display:flex;align-items:stretch;justify-content:center}
+.chat[hidden]{display:none}
+.chat__caja{background:var(--crema);width:100%;display:flex;flex-direction:column;min-height:0}
+.chat__cab{display:flex;align-items:center;justify-content:space-between;background:var(--verde);color:#fff;padding:10px 12px 10px 16px}
+.chat__cab h2{color:#fff;font:700 1rem var(--fuente);margin:0}
+.chat__x{width:44px;height:44px;border:0;background:transparent;color:#fff;font-size:2rem;line-height:1;cursor:pointer}
+.chat__msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.m{max-width:85%;padding:10px 14px;border-radius:16px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:1rem;line-height:1.45}
+.m.bot{background:#fff;border:1px solid var(--borde);align-self:flex-start;border-bottom-left-radius:4px}
+.m.yo{background:var(--verde);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.m.pensando{color:var(--suave);font-style:italic}
+.chat__tarjeta{margin:0 16px 8px;padding:10px 12px;border:1px solid #e3c7a8;background:#fbefdc;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.95rem}
+.chat__tarjeta b{display:block;margin-bottom:2px}
+.chat__estado{margin:0 16px;min-height:1.4em;font-size:.9rem;color:#9a3412}
+.chat__fin{margin:0 16px 8px;padding:12px;background:#fff;border:1px solid var(--borde);border-radius:12px;display:flex;flex-direction:column;gap:10px}
+.chat__fin[hidden]{display:none}
+.chat__fin p{margin:0}
+.chat__form{display:flex;gap:8px;padding:8px 16px}
+.chat__form input{flex:1;min-width:0;min-height:48px;border:2px solid var(--borde);border-radius:999px;padding:0 16px;font:1rem var(--fuente);background:#fff;color:var(--tinta)}
+.chat__form input:disabled,.chat__form button:disabled{opacity:.5}
+.chat__nota{margin:0;padding:0 16px 4px;font-size:.8rem;color:var(--suave)}
+.chat__pie{padding:0 16px 12px}
+.enlace{background:none;border:0;color:var(--verde);text-decoration:underline;font:600 .95rem var(--fuente);cursor:pointer;min-height:44px;padding:0}
+
+@media(min-width:760px){
+  body{font-size:18px}
+  .hero{grid-template-columns:1.05fr .95fr;align-items:center;padding:56px 24px 64px;gap:48px}
+  .acciones{flex-direction:row}
+  .tarjetas{grid-template-columns:1fr 1fr}
+  .pasos{grid-template-columns:repeat(3,1fr)}
+  .pasos li{padding:68px 18px 18px}
+  .pasos li::before{left:18px;top:18px;transform:none}
+  .dos{grid-template-columns:1fr 1fr;gap:56px}
+  .dos--c{align-items:center}
+  .wrap{padding:0 24px}
+  .chat{align-items:flex-end;justify-content:flex-end;background:transparent;pointer-events:none;padding:20px}
+  .chat__caja{pointer-events:auto;width:400px;height:min(640px,calc(100vh - 40px));border-radius:20px;overflow:hidden;box-shadow:0 24px 60px -12px rgba(0,0,0,.4);border:1px solid var(--borde)}
+  .flota{right:24px;bottom:24px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Que la cabecera fija no tape el título al saltar a una sección. */
+html{scroll-padding-top:84px}
