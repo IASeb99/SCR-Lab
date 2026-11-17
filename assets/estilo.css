@@ -258,3 +258,4 @@ svg[hidden]{display:none}
   .cinta{flex-wrap:wrap;width:auto;justify-content:center;row-gap:8px}
   .cinta .copia{display:none}
 }
+a[data-wa][hidden]{display:none!important}
