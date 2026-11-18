@@ -259,3 +259,4 @@ svg[hidden]{display:none}
   .cinta .copia{display:none}
 }
 a[data-wa][hidden]{display:none!important}
+.marca{display:inline-block;line-height:0}.marca img,.pie-logo img{display:block;height:44px;width:auto}.pie-logo{display:inline-block;line-height:0;padding:0 !important}
